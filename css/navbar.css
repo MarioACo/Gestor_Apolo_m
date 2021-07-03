@@ -1,0 +1,21 @@
+.nave{
+  background: cadetblue;
+}
+
+  
+p{
+  color:white;  
+  
+  font-family: monospace;
+}
+
+
+p:hover{
+  color: aqua;
+  
+}
+
+.salir:hover{
+  color:red;
+}
+

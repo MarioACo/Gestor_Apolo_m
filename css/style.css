@@ -1,0 +1,51 @@
+.btn_carousel{
+    background: rgb(255,255,255, 0.5);
+}
+
+.btn_carousel:hover{
+    background: rgb(255,255,255, 0.6);
+}
+
+.btn-descarga{
+    background: #e1e13f;
+    color: #fff;
+    width: 50%;
+    border-color: #afaf39;
+	border-radius: 25px;
+}
+
+.btn-descarga:hover{
+    background: #afaf39;
+    color: #fff;
+    width: 50%;
+    border-color: rgb(116, 116, 40);
+	border-radius: 25px;
+}
+
+.btn-ver{
+    background: #94378e;
+    color: #fff;
+    width: 50%;
+    border-color: #74226e;
+	border-radius: 25px;
+}
+
+.btn-ver:hover{
+    background: #74226e;
+    color: #fff;
+    width: 50%;
+    border-color: #551451;
+	border-radius: 25px;
+}
+
+.table-custom {
+    --bs-table-bg: #4a548c;
+    --bs-table-striped-bg: #56678a;
+    --bs-table-striped-color: #fff;
+    --bs-table-active-bg: #bacbe6;
+    --bs-table-active-color: #000;
+    --bs-table-hover-bg: #364a73;
+    --bs-table-hover-color: #fff;
+    color: #fff;
+    border-color: #3c4888;
+}
