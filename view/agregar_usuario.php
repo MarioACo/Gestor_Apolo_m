@@ -10,10 +10,10 @@
 
 <div class="container mt-4">
 
-    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#agregar_usuario">
+    <button type="button" class="btn btn-outline-dark rounded-pill mb-4" data-bs-toggle="modal" data-bs-target="#agregar_usuario">
         Agregar Usuario
     </button>
-    <div class="row mt-2" style="text-align:center;">
+    <div class="row mt-2 table-responsive" style="text-align:center;">
     
 
         <?php
@@ -25,7 +25,7 @@
             $result = mysqli_query($conexion, $query);
         ?>
 
-        <table class="table table-dark opacidad" id="tabla_agregar_usuario">
+        <table class="table table-dark table-hover table-bordered border-white opacidad" id="tabla_agregar_usuario">
             <thead>
                 <td>ID Matricula</td>
                 <td>No Control</td>

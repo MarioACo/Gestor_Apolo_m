@@ -419,7 +419,15 @@ function activador(name_radio, id_1, id_h_1, id_h_2){
 }
 $(document).ready(() => {
   horas();
-  $('#tabla_agregar_materia').DataTable();
+  $('#tabla_agregar_materia').DataTable({
+    scrollX: true,
+    scrollY:        '50vh',
+    scrollCollapse: true,
+    paging:         false,
+    language: {
+      url: 'json/spanish-Mexico.json'
+    }
+  });
   $.ajax({
     type : "POST",
     data: {"ocupacion" : "Profesor"},

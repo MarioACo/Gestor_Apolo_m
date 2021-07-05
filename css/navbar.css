@@ -1,9 +1,4 @@
-.nave{
-  background: cadetblue;
-}
-
-  
-p{
+ p{
   color:white;  
   
   font-family: monospace;
@@ -19,3 +14,15 @@ p:hover{
   color:red;
 }
 
+.barax3{
+  width: 300px;
+}
+.barax2{
+  width: 250px;
+}
+.logo{
+  width: 400px;
+}
+.logoa{
+  width: 300px;
+}

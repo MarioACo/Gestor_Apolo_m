@@ -440,7 +440,15 @@ function ajaxActualizarUsuarios() {
 }
 
 $(document).ready(function(){
-  $('#tabla_agregar_usuario').DataTable();
+  $('#tabla_agregar_usuario').DataTable({
+    scrollX: true,
+    scrollY:        '50vh',
+    scrollCollapse: true,
+    paging:         false,
+    language: {
+      url: 'json/spanish-Mexico.json'
+    }
+});
 
   $('#inputControlActualizar').on('input', function() {
     this.value = this.value.replace(/[^0-9]/g, '');

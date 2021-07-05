@@ -34,8 +34,8 @@
                 <?php
                     while($archivo = mysqli_fetch_array($result)){
     
-                        $hour = $archivo['profesor_no'];
-                        $semes = $archivo['semestre'];
+                        $hour = isset($archivo['profesor_no']);
+                        $semes = isset($archivo['semestre']);
                         $visible = "";
                         $query = "SELECT nombre_archivo, materia, visible FROM archivos WHERE profesor_no = $hour AND semestre = $semes";
                         $r = mysqli_query($conexion, $query);

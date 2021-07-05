@@ -20,7 +20,7 @@
         <div class="col">
             <h1 class="lead text-center">Materias</h1>
             <hr>
-            <table id="table_materias" class="table table-striped table-bordered mt-2" style="width:100%">
+            <table id="table_materias" class="table table-dark table-hover table-bordered border-white mt-2" style="width:100%">
                 <thead>
                     <tr>
                         <td>Materia</td>

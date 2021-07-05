@@ -218,7 +218,15 @@ $(document).ready(() => {
     });
       
     $(document).ready(function() {
-        $('#table_archivos').DataTable();
+        $('#table_archivos').DataTable({
+            scrollX: true,
+            scrollY:        '50vh',
+            scrollCollapse: true,
+            paging:         false,
+            language: {
+              url: 'json/spanish-Mexico.json'
+            }
+        });
     } );
     
     $('#btn_guardar').click(() => {

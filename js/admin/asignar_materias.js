@@ -348,7 +348,15 @@ function fechasActualizar(){
 
 $(document).ready(() => {
   
-  $('#tabla_asignar_materias').DataTable();
+  $('#tabla_asignar_materias').DataTable({
+      scrollX: true,
+      scrollY:        '50vh',
+      scrollCollapse: true,
+      paging:         false,
+      language: {
+        url: 'json/spanish-Mexico.json'
+      }
+  });
 
   $.ajax({
     type : "POST",

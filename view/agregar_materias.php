@@ -16,12 +16,12 @@
             $result = mysqli_query($conexion, $query);
         ?>
 <div class="container mt-4">
-    <button id="btn_agregar_mater" type="button" class="btn btn-outline-success mb-4" data-bs-toggle="modal" data-bs-target="#agregar_materia">
+    <button id="btn_agregar_mater" type="button" class="btn btn-outline-dark rounded-pill mb-4" data-bs-toggle="modal" data-bs-target="#agregar_materia">
         Agregar Materia
     </button>
     <div class="row mt-2" style="text-align:center;">
 
-        <table class="table table-dark opacidad" id="tabla_agregar_materia">
+        <table class="table table-dark table-hover table-bordered border-white opacidad" id="tabla_agregar_materia">
             <thead>
                 <td>Matricula de la Materia</td>
                 <td>Materia</td>

@@ -18,7 +18,7 @@ if(isset($_SESSION['no_control'])){
 <div class="container mt-4">
     <div class="row" style="text-align:center;">
 
-        <table class="table table-dark opacidad">
+        <table class="table table-dark table-hover table-bordered border-white opacidad">
             <thead>
                 <td>Matricula de la Materia</td>
                 <td>Nombre de la Materia</td>

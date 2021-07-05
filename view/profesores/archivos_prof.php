@@ -22,10 +22,10 @@
         <div class="row mt-2" style="text-align:center";>
             <div class="col">
                 <h1 class="lead text-center">Archivos</h1>
-                <button  type="button" class="btn btn-outline-info mb-2 mt-2" data-bs-toggle="modal" data-bs-target="#modal_subida"> <span class="fas fa-plus-circle"></span> Agregar</span></button>
+                <button  type="button" class="btn btn-outline-info mb-2 mt-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modal_subida"> <span class="fas fa-plus-circle"></span> Agregar</span></button>
                 <hr>
                 <br>
-                <table class="table table-dark opacidad" id="table_archivos" class="hover" style="width:100%">
+                <table class="table table-dark table-hover table-bordered border-white opacidad" id="table_archivos" class="hover" style="width:100%">
                     <thead>
                         <td>Numero de Control del Profesor</td>
                         <td>Matricula</td>
@@ -83,11 +83,11 @@
         </div>
         <!--Descarga-->
         <div class="row">
-            <div class="col-sm-3 offset-9">
+            <div class="col-sm-3 offset-9 d-grid">
                 <hr>
                 <h1 class="lead">Descarga total en formato zip</h1>
                 
-                <a class="btn btn-success mt-3" id="descargarZip" href=<?php echo $rutaDescarga = 'php/zip/'. $no_control . ".zip"?> download="<?php echo $no_control . ".zip"?>"> <i class="far fa-file-archive"></i> Descarga</a>
+                <a class="btn btn-success mt-1 rounded-pill" id="descargarZip" href=<?php echo $rutaDescarga = 'php/zip/'. $no_control . ".zip"?> download="<?php echo $no_control . ".zip"?>"> <i class="far fa-file-archive"></i> Descarga</a>
             </div>
         </div>
     </div>

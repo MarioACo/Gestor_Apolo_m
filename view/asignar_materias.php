@@ -9,12 +9,12 @@
     $result = mysqli_query($conexion, $query);
 ?>
 <div class="container mt-3">
-    <button type="button" class="btn btn-outline-success mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-outline-dark rounded-pill mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Asignar Materia
     </button>
     <div class="row mt-2" style="text-align:center;">
 
-        <table class="table table-dark opacidad" id="tabla_asignar_materias">
+        <table class="table table-dark table-hover table-bordered border-white opacidad" id="tabla_asignar_materias">
             <thead>
                 <td>N° Control Alumno</td>
                 <td>Nombre del alumno</td>
