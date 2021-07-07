@@ -57,7 +57,7 @@
     
     $datos = array(
       "id_materia" => $categoria['id_materia'],
-      "clave_materia" => $categoria['clave_materia'],
+      "clave" => $categoria['clave_materia'],
       "nombre_materia" => $categoria['nombre_materia'],
       "ciclo_escolar_inicio" => $categoria['ciclo_escolar_inicio'],
       "ciclo_escolar_final" => $categoria['ciclo_escolar_final'],

@@ -349,7 +349,7 @@ function fechasActualizar(){
 $(document).ready(() => {
   
   $('#tabla_asignar_materias').DataTable({
-      scrollX: true,
+      scrollX: false,
       scrollY:        '50vh',
       scrollCollapse: true,
       paging:         false,

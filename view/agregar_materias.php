@@ -92,20 +92,12 @@
                                     <div class="col-sm-6">
                                         <h3 class="login-heading mb-4">Agregar Materias</h3>
                                         <div class="form-label-group">
-                                            <input type="text" id="inputMatricula" name="inputMatricula" class="form-control" required autofocus>
-                                            <label for="inputMatricula">Matricula Materia</label>
-                                        </div>
-                                        <div class="form-label-group">
-                                            <input type="text" id="inputMateria" name="inputMateria" class="form-control" required autofocus>
-                                            <label for="inputMateria">Nombre de la Materia</label>
-                                        </div>
-                                        <div class="form-label-group">
-                                            <input type="text" id="inputICicloEscolar" name="inputICicloEscolar" readonly="" class="form-control" required autofocus>
-                                            <label for="inputICicloEscolar">Inicio del Ciclo Escolar</label>
-                                        </div>
-                                        <div class="form-label-group">
-                                            <input type="text" id="inputFCicloEscolar" name="inputFCicloEscolar" readonly="" class="form-control" required autofocus>
-                                            <label for="inputFCicloEscolar">Fin del Ciclo Escolar</label>
+                                            <select class="form-control rounded-pill" id="inputCarrera" name="inputCarrera">
+                                                <option selected value="">Carrera</option>
+                                                <option value="sistemas"> Sistemas Computacionales</option>
+                                                <option value="gestion"> Gestion Empresarial</option>
+                                                <option value="industrial"> Industrial</option>
+                                            </select>
                                         </div>
                                         <div class="form-label-group">
                                             <select class="form-control rounded-pill" id="inputSemestre" name="inputSemestre">
@@ -122,12 +114,20 @@
                                             </select>
                                         </div>
                                         <div class="form-label-group">
-                                            <select class="form-control rounded-pill" id="inputCarrera" name="inputCarrera">
-                                                <option selected value="">Carrera</option>
-                                                <option value="Sistemas"> Sistemas Computacionales</option>
-                                                <option value="Gestion"> Gestion Empresarial</option>
-                                                <option value="Industrial"> Industrial</option>
+                                            <select id="inputMatricula" name="inputMatricula" class="form-control">
                                             </select>
+                                        </div>
+                                        <div class="form-label-group">
+                                            <input disabled type="text" id="inputMateria" name="inputMateria" class="form-control" required autofocus>
+                                            <label for="inputMateria">Nombre de la Materia</label>
+                                        </div>
+                                        <div class="form-label-group">
+                                            <input type="text" id="inputICicloEscolar" name="inputICicloEscolar" readonly="" class="form-control" required autofocus>
+                                            <label for="inputICicloEscolar">Inicio del Ciclo Escolar</label>
+                                        </div>
+                                        <div class="form-label-group">
+                                            <input type="text" id="inputFCicloEscolar" name="inputFCicloEscolar" readonly="" class="form-control" required autofocus>
+                                            <label for="inputFCicloEscolar">Fin del Ciclo Escolar</label>
                                         </div>
                                         <div class="form-label-group">
                                             <input type="text" id="inputGrupo" name="inputGrupo" class="form-control" required autofocus>
@@ -245,20 +245,12 @@
                                             <input type="hidden" id="idMateriaActualizar" name="idMateriaActualizar">
                                         </div>
                                         <div class="form-label-group">
-                                            <input type="text" id="inputMatriculaActualizar" name="inputMatriculaActualizar" class="form-control" required autofocus>
-                                            <label for="inputMatriculaActualizar">Matricula Materia</label>
-                                        </div>
-                                        <div class="form-label-group">
-                                            <input type="text" id="inputMateriaActualizar" name="inputMateriaActualizar" class="form-control" required autofocus>
-                                            <label for="inputMateriaActualizar">Nombre de la Materia</label>
-                                        </div>
-                                        <div class="form-label-group">
-                                            <input type="text" id="inputICicloEscolarActualizar" name="inputICicloEscolarActualizar" readonly="" class="form-control" required autofocus>
-                                            <label for="inputICicloEscolarActualizar">Inicio del Ciclo Escolar</label>
-                                        </div>
-                                        <div class="form-label-group">
-                                            <input type="text" id="inputFCicloEscolarActualizar" name="inputFCicloEscolarActualizar" readonly="" class="form-control" required autofocus>
-                                            <label for="inputFCicloEscolarActualizar">Fin del Ciclo Escolar</label>
+                                            <select class="form-control rounded-pill" id="inputCarreraActualizar" name="inputCarreraActualizar">
+                                                <option selected value="">Carrera</option>
+                                                <option value="sistemas"> Sistemas Computacionales</option>
+                                                <option value="gestion"> Gestion Empresarial</option>
+                                                <option value="industrial"> Industrial</option>
+                                            </select>
                                         </div>
                                         <div class="form-label-group">
                                             <select class="form-control rounded-pill" id="inputSemestreActualizar" name="inputSemestreActualizar">
@@ -275,12 +267,20 @@
                                             </select>
                                         </div>
                                         <div class="form-label-group">
-                                            <select class="form-control rounded-pill" id="inputCarreraActualizar" name="inputCarreraActualizar">
-                                                <option selected value="">Carrera</option>
-                                                <option value="Sistemas"> Sistemas Computacionales</option>
-                                                <option value="Gestion"> Gestion Empresarial</option>
-                                                <option value="Industrial"> Industrial</option>
+                                            <select type="text" id="inputMatriculaActualizar" name="inputMatriculaActualizar" class="form-control" required autofocus>
                                             </select>
+                                        </div>
+                                        <div class="form-label-group">
+                                            <input disabled type="text" id="inputMateriaActualizar" name="inputMateriaActualizar" class="form-control" required autofocus>
+                                            <label for="inputMateriaActualizar">Nombre de la Materia</label>
+                                        </div>
+                                        <div class="form-label-group">
+                                            <input type="text" id="inputICicloEscolarActualizar" name="inputICicloEscolarActualizar" readonly="" class="form-control" required autofocus>
+                                            <label for="inputICicloEscolarActualizar">Inicio del Ciclo Escolar</label>
+                                        </div>
+                                        <div class="form-label-group">
+                                            <input type="text" id="inputFCicloEscolarActualizar" name="inputFCicloEscolarActualizar" readonly="" class="form-control" required autofocus>
+                                            <label for="inputFCicloEscolarActualizar">Fin del Ciclo Escolar</label>
                                         </div>
                                         <div class="form-label-group">
                                             <input type="text" id="inputGrupoActualizar" name="inputGrupoActualizar" class="form-control" required autofocus>

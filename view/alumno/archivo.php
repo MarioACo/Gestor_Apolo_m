@@ -6,8 +6,19 @@
     
         $conexion = conexion();
         $no_control = $_SESSION['no_control'];
-        $query = "SELECT profesor_no, semestre FROM asignar_materia WHERE no_control = $no_control";
-        $result = mysqli_query($conexion, $query);
+        $query = "SELECT 
+                asignar_materia.profesor_no as profesor_no,
+                archivos.nombre_archivo as nombre_archivo,
+                asignar_materia.semestre as semestre,
+                asignar_materia.nombre_materia as nombre_materia,
+                archivos.materia as materia,
+                archivos.semestre as semestre,
+                archivos.visible as fecha
+            FROM
+                asignar_materia AS asignar_materia
+            INNER JOIN
+                archivos AS archivos ON asignar_materia.profesor_no = archivos.profesor_no AND asignar_materia.no_control = $no_control AND ";
+        $result = mysqli_query($conexion, $query);  
     
 
 ?>
@@ -33,24 +44,19 @@
                 <tbody>
                 <?php
                     while($archivo = mysqli_fetch_array($result)){
-    
-                        $hour = isset($archivo['profesor_no']);
-                        $semes = isset($archivo['semestre']);
-                        $visible = "";
-                        $query = "SELECT nombre_archivo, materia, visible FROM archivos WHERE profesor_no = $hour AND semestre = $semes";
-                        $r = mysqli_query($conexion, $query);
-                        $horar = mysqli_fetch_array($r);
-                        $visible = isset($horar['visible']);
-                    
+                        
+                        echo var_dump($archivo);
+                        
+                
                         if($visible == 'si'){
                         
                         
 
                 ?>  
                     <tr class="text-center">
-                        <td><?php echo $horar['nombre_archivo']?></td>
-                        <td><?php echo $horar['materia']?></td>
-                        <td><?php echo $archivo['semestre']?></td>
+                        <td><?php echo $horar['nombre_archivo'];?></td>
+                        <td><?php echo $horar['materia'];?></td>
+                        <td><?php echo $horar['semestre'];?></td>
                         <td>
                             <span class="btn btn-descarga btn-block"><i class="far fa-arrow-alt-circle-down"></i></span>
                         </td>

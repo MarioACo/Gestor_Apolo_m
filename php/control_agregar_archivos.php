@@ -12,7 +12,7 @@
     $result_1 = mysqli_query($conexion, $query_1);
     $m = mysqli_fetch_array($result_1);
     $archivo = $_FILES['inputArchivo']['name'];
-    $materia = $m['nombre_materia'];
+    $materia = trim($m['nombre_materia']);
     $grupo = $m['grupo'];
     $unidad = $_POST['inputUnidad'];
     $semestre = $m['semestre'];

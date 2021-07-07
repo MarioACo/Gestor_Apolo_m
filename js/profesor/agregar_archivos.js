@@ -216,18 +216,130 @@ $(document).ready(() => {
             }
         });
     });
-      
-    $(document).ready(function() {
-        $('#table_archivos').DataTable({
-            scrollX: true,
-            scrollY:        '50vh',
-            scrollCollapse: true,
-            paging:         false,
-            language: {
-              url: 'json/spanish-Mexico.json'
+    
+    $('#todo').click(() => {
+        $('#opcion1').prop('disabled', true).html(`<option value=""> </option>`);
+        $('#opcion2').prop('disabled', true).html(`<option value=""> </option>`);
+        $('#opcion3').prop('disabled', true).html(`<option value=""> </option>`);
+    });
+    
+    $('#porSemestre').click(() => {
+        $('#opcion1').removeAttr('disabled');
+        $.ajax({
+            type : "POST",
+            url : "php/control_buscar_semestre.php",
+            success : (r) => {
+                $('#opcion1').html(r);
             }
         });
-    } );
+        $('#opcion2').removeAttr('disabled');
+        $.ajax({
+            type : "POST",
+            url : "php/control_buscar_grupo.php",
+            success : (r) => {
+                $('#opcion2').html(r);
+            }
+        });
+        $('#opcion3').removeAttr('disabled');
+        $.ajax({
+            type : "POST",
+            url : "php/control_buscar_materia.php",
+            success : (r) => {
+                $('#opcion3').html(r);
+            }
+        });
+    });
+
+    $('#porUnidad').click(() => {
+        $('#opcion1').removeAttr('disabled');
+        $.ajax({
+            type : "POST",
+            url : "php/control_buscar_unidad.php",
+            success : (r) => {
+                $('#opcion1').html(r);
+            }
+        });
+        $('#opcion2').removeAttr('disabled');
+        $.ajax({
+            type : "POST",
+            url : "php/control_buscar_grupo.php",
+            success : (r) => {
+                $('#opcion2').html(r);
+            }
+        });
+        $('#opcion3').removeAttr('disabled');
+        $.ajax({
+            type : "POST",
+            url : "php/control_buscar_materia.php",
+            success : (r) => {
+                $('#opcion3').html(r);
+            }
+        });
+    });
+
+    $('#porGrupo').click(() => {
+        $('#opcion1').removeAttr('disabled');
+        $.ajax({
+            type : "POST",
+            url : "php/control_buscar_grupo.php",
+            success : (r) => {
+                $('#opcion1').html(r);
+            }
+        });
+        $('#opcion2').removeAttr('disabled');
+        $.ajax({
+            type : "POST",
+            url : "php/control_buscar_semestre.php",
+            success : (r) => {
+                $('#opcion2').html(r);
+            }
+        });
+        $('#opcion3').removeAttr('disabled');
+        $.ajax({
+            type : "POST",
+            url : "php/control_buscar_materia.php",
+            success : (r) => {
+                $('#opcion3').html(r);
+            }
+        });
+    });
+
+    $('#porMateria').click(() => {
+        $('#opcion1').removeAttr('disabled');
+        $.ajax({
+            type : "POST",
+            url : "php/control_buscar_materia.php",
+            success : (r) => {
+                $('#opcion1').html(r);
+            }
+        });
+        $('#opcion2').removeAttr('disabled');
+        $.ajax({
+            type : "POST",
+            url : "php/control_buscar_semestre.php",
+            success : (r) => {
+                $('#opcion2').html(r);
+            }
+        });
+        $('#opcion3').removeAttr('disabled');
+        $.ajax({
+            type : "POST",
+            url : "php/control_buscar_unidad.php",
+            success : (r) => {
+                $('#opcion3').html(r);
+            }
+        });
+    });
+
+    $('#table_archivos').DataTable({
+        scrollX: true,
+        scrollY:        '50vh',
+        scrollCollapse: true,
+        paging:         false,
+        language: {
+          url: 'json/spanish-Mexico.json'
+        }
+    });
     
     $('#btn_guardar').click(() => {
         ajaxSubirArchivos();

@@ -31,7 +31,7 @@
                     while($asignacion = mysqli_fetch_array($result)){
                 ?>
                 <tr>  
-                    <th><?php echo $asignacion['no_control'];?></>
+                    <th><?php echo $asignacion['no_control'];?></th>
                     <th><?php echo $asignacion['nombre_alumno'];?></th>
                     <th><?php echo $asignacion['carrera'];?></th>
                     <th><?php echo $asignacion['tipo_clase'];?></th>
@@ -44,13 +44,16 @@
                             type="button"
                             data-bs-toggle="modal" data-bs-target="#actualizar_asignado"
                             onclick="infoAsignar(<?php echo $asignacion['id_asg_materia'];?>)">
-                            <i class="far fa-edit"></i></span>
+                            <i class="far fa-edit"></i>
+                        </span>
                     </th>
 
-                    <th><span id="btn_eliminar" class="btn btn-outline-danger btn-sm" type="button"
+                    <th>
+                        <span id="btn_eliminar" class="btn btn-outline-danger btn-sm" type="button"
                             onclick="eliminarAsignado(<?php echo $asignacion['id_asg_materia'];?>,`<?php echo $asignacion['no_control'];?>`,`<?php echo $asignacion['nombre_materia'];?>`)">
                             <i class="fas fa-trash"></i>
-                        </span></th>
+                        </span>
+                    </th>
 
                 </tr>
                 <?php

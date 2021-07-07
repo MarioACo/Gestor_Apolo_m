@@ -62,13 +62,14 @@ function infoMateria(id_materia){
     success : (respuesta) => {
       console.log(respuesta);
       respuesta = JSON.parse(respuesta);
+      let l = respuesta['clave'];
       $('#idMateriaActualizar').val(respuesta['id_materia']);
-      $('#inputMatriculaActualizar').val(respuesta['clave_materia']);
+      $('#inputCarreraActualizar').val(respuesta['carrera']);
+      $('#inputSemestreActualizar').val(respuesta['semestre']);
+      $('#inputMatriculaActualizar').val(respuesta['clave']);
       $('#inputMateriaActualizar').val(respuesta['nombre_materia']);
       $('#inputICicloEscolarActualizar').val(respuesta['ciclo_escolar_inicio']);
       $('#inputFCicloEscolarActualizar').val(respuesta['ciclo_escolar_final']);
-      $('#inputSemestreActualizar').val(respuesta['semestre']);
-      $('#inputCarreraActualizar').val(respuesta['carrera']);
       $('#inputGrupoActualizar').val(respuesta['grupo']);
       $('#inputMatriculaProfesorActualizar').val(respuesta['profesor_no']);
       $('#inputNombreProfesorActualizar').val(respuesta['profesor_nombre']);
@@ -127,6 +128,18 @@ function infoMateria(id_materia){
         $('#viernesSiActualizar').attr('checked', true);
         $('#viernesNoActualizar').attr('checked', false);
       }
+      $.ajax({
+        type : "POST",
+        data: {
+          "carrera" : $('#inputCarreraActualizar').val(),
+          "semestre": $('#inputSemestreActualizar').val(),
+        },
+        url : "php/control_obtener_materias.php",
+        success : (r) => {
+          $('#inputMatriculaActualizar').html(r);
+          $(`#inputMatriculaActualizar > option[value='${l}']`).attr("selected", true);
+        }
+      });
     }
   });  
 }
@@ -428,6 +441,70 @@ $(document).ready(() => {
       url: 'json/spanish-Mexico.json'
     }
   });
+
+  $('#inputCarrera').on('change', () => {
+    $('#inputSemestre').removeAttr('disabled');
+  });
+
+  $('#inputSemestre').on('change', () => {
+    $('#inputMatricula').removeAttr('disabled');
+    $.ajax({
+      type : "POST",
+      data: {
+        "carrera" : $('#inputCarrera').val(),
+        "semestre": $('#inputSemestre').val(),
+      },
+      url : "php/control_obtener_materias.php",
+      success : (r) => {
+        $('#inputMatricula').html(r);
+      }
+    });
+  });
+
+  $('#inputSemestreActualizar').on('change', () => {
+    $.ajax({
+      type : "POST",
+      data: {
+        "carrera" : $('#inputCarreraActualizar').val(),
+        "semestre": $('#inputSemestreActualizar').val(),
+      },
+      url : "php/control_obtener_materias.php",
+      success : (r) => {
+        $('#inputMatriculaActualizar').html(r);
+      }
+    });
+  });
+
+  $('#inputMatricula').on('change', () => {
+    $.ajax({
+      type : "POST",
+      data: {
+        "carrera" : $('#inputCarrera').val(),
+        "semestre": $('#inputSemestre').val(),
+        "clave": $('#inputMatricula').val(),
+      },
+      url : "php/control_obtener_materias_nombre.php",
+      success : (r) => {
+        $('#inputMateria').val(r);
+      }
+    });
+  });
+
+  $('#inputMatriculaActualizar').on('change', () => {
+    $.ajax({
+      type : "POST",
+      data: {
+        "carrera" : $('#inputCarreraActualizar').val(),
+        "semestre": $('#inputSemestreActualizar').val(),
+        "clave": $('#inputMatriculaActualizar').val(),
+      },
+      url : "php/control_obtener_materias_nombre.php",
+      success : (r) => {
+        $('#inputMateriaActualizar').val(r);
+      }
+    });
+  });
+
   $.ajax({
     type : "POST",
     data: {"ocupacion" : "Profesor"},
