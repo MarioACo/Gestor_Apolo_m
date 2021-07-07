@@ -18,8 +18,7 @@ if($zip->open($archivo,ZipArchive::CREATE) == true){
     }
     $zip->close();
     $archivos = mysqli_fetch_array($result);
-    $rutaDescarga2 = "zip/". $archivos['profesor_no'];
-    unlink($rutaDescarga2);
+    
     
     
 }

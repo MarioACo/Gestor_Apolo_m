@@ -6,7 +6,7 @@
               FROM usuarios
               WHERE ocupacion = '$ocupacion'";
     $result = mysqli_query($conexion, $query);
-    $lista = '<option selected disabled value="0">Matricula Profesor</option>';
+    $lista = '<option selected value="">Matricula Profesor</option>';
     while($no_control = mysqli_fetch_row($result)){
       $lista .= "<option value='$no_control[0]'>$no_control[0]</option>";
     }

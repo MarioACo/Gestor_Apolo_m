@@ -88,6 +88,7 @@
                                 </div>
                                 <div class="form-label-group">
                                     <select class="form-control rounded-pill" aria-label=".form-select-lg example" id="inputGrupo" name="inputGrupo">
+                                        <option valua=""> </option>
                                     </select>
                                 </div>
                                 <div class="form-label-group">
@@ -96,6 +97,7 @@
                                 </div>
                                 <div class="form-label-group">
                                     <select class="form-control rounded-pill" aria-label=".form-select-lg example" id="inputMateria" name="inputMateria">
+                                        <option valua=""> </option>
                                     </select>
                                 </div>
                                 <div class="form-label-group">

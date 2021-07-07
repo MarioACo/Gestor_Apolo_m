@@ -1,57 +1,35 @@
-function validar_vacios(){
-  if($('#inputMatricula').val() == "" || /^\s+$/.test($('#inputMatricula').val())){
+let mensaje = ""
+let mensaje_alerta = false
+
+function vacio(id, nombre) {
+    if ($(id).val() != "") {
+        $(id).addClass('is-valid')
+        $(id).removeClass('is-invalid')
+    } else {
+        $(id).addClass('is-invalid')
+        $(id).removeClass('is-valid')
+        mensaje += `${nombre}, `
+        mensaje_alerta = true
+    }
+}
+
+function swal_vacio(mensaje_vacio) {
     Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar la matricula',
-      showConfirmButton: true,
-      toast: true,
-      
-    });
-  }else if($('#inputMateria').val() == "" || /^\s+$/.test($('#inputMateria').val())){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar el nombre de la materia',
-      showConfirmButton: true,
-      toast: true,
-    });
-  }else if ($('#inputICicloEscolar').val() == "" || /^\s+$/.test($('#inputICicloEscolar').val())){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar el inicio del Ciclo escolar',
-      showConfirmButton: true,
-      toast: true,
-    });
-  }else if ($('#inpuFCicloEscolar').val() == "" || /^\s+$/.test($('#inputFCicloEscolar').val())){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar el fin del Ciclo escolar',
-      showConfirmButton: true,
-      toast: true,
-    });
-  }else if($('#inputSemestre').val() == ""){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar el Semestre',
-      showConfirmButton: true,
-      toast: true,
-    });
-  }else if($('#inputCarrera').val() == "" || /^\s+$/.test($('#inputCarrera').val())){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar la el nombre de la carrera',
-      showConfirmButton: true,
-      toast: true,
-    });
-  }else{
-    ajaxMateria();
-    $('#exampleModal').modal('hide');
-  }
+        icon: 'warning',
+        html: `
+            <p class="fs-2">Te faltan los siguientes campos:</p>
+            <p class="fs-5">${mensaje_vacio}</p>
+        `,
+        showClass: {
+            popup: 'animate__animated animate__fadeInDownBig'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutDownBig'
+        }
+    }).then(() => {
+        mensaje = ""
+        mensaje_alerta = false
+    })
 }
 
 function infoMateria(id_materia){
@@ -236,61 +214,6 @@ function ajaxMateria(){
   });
 }
 
-function validar_vacios_actualizar(){
-  if($('#inputMatricula_actualizar').val() == "" || /^\s+$/.test($('#inputMatricula_actualizar').val())){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar la nueva matricula',
-      showConfirmButton: true,
-      toast: true,
-    });
-  }else if($('#inputMateria_actualizar').val() == "" || /^\s+$/.test($('#inputMateria_actualizar').val())){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar el nuevo nombre de la materia',
-      showConfirmButton: true,
-      toast: true,
-    });
-  }else if ($('#inputICicloEscolar_actualizar').val() == "" || /^\s+$/.test($('#inputICicloEscolar_actualizar').val())){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar el nuevo inicio del Ciclo escolar',
-      showConfirmButton: true,
-      toast: true,
-    });
-  }else if ($('#inputFCicloEscolar_actualizar').val() == "" || /^\s+$/.test($('#inputFCicloEscolar_actualizar').val())){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar el nuevo fin del Ciclo escolar',
-      showConfirmButton: true,
-      toast: true,
-    });
-  }else if($('#inputSemestre_actualizar').val() == ""){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar el nuevo Semestre',
-      showConfirmButton: true,
-      toast: true,
-    });
-  }else if($('#inputCarrera_actualizar').val() == "" || /^\s+$/.test($('#inputCarrera_actualizar').val())){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar el nuevo nombre de la carrera',
-      showConfirmButton: true,
-      toast: true,
-    });
-  }else{
-    ajaxActualizarMateria();
-    $('#exampleModal').modal('hide');
-  }
-}
-
 function ajaxActualizarMateria(){
   
   $.ajax({
@@ -415,8 +338,15 @@ $("#lunesFin,#martesFin,#miercolesFin,#juevesFin,#viernesFin,#lunesFinActualizar
    dropdown: true,
    scrollbar: false
 });
+}
 
-
+function vacio_radio(name_radio, id_1, id_h_1, nombre, id_h_2, nombre2){
+  $(`input[name='${name_radio}']`).click(() => {
+    if($(id_1).is(":checked")){
+      vacio(id_h_1, nombre);
+      vacio(id_h_2, nombre2);
+    }
+  });
 }
 
 function activador(name_radio, id_1, id_h_1, id_h_2){
@@ -562,11 +492,51 @@ $(document).ready(() => {
 
 
   $('#btn_guardar').click(() => {
-    validar_vacios();
+    vacio('#inputCarrera', 'Carrera')
+    vacio('#inputSemestre', 'Semestre')
+    vacio('#inputMatricula', 'Matricula de la Materia')
+    vacio('#inputMateria', 'Nombre de la Materia')
+    vacio('#inputICicloEscolar', 'Inicio del Ciclo Escolar')
+    vacio('#inpuFCicloEscolar', 'Fin del Ciclo Escolar')
+    vacio('#inputGrupo', 'Grupo')
+    vacio('#inputMatriculaProfesor', 'Matricula Profesor')
+    vacio('#inputNombreProfesor', 'Nombre Profesor')
+    vacio_radio('lunes', '#lunesSi', '#lunesInicio', 'inicio lunes','#lunesFin', 'fin lunes')
+    vacio_radio('martes', '#martesSi', '#martesInicio', 'inicio martes','#martesFin', 'fin martes')
+    vacio_radio('miercoles', '#miercolesSi', '#miercolesInicio', 'inicio miercoles','#miercolesFin', 'fin miercoles')
+    vacio_radio('jueves', '#juevesSi', '#juevesInicio', 'inicio jueves','#juevesFin', 'fin jueves')
+    vacio_radio('viernes', '#viernesSi', '#viernesInicio', 'inicio viernes','#viernesFin', 'fin viernes')
+    if (mensaje_alerta) {
+      mensaje = mensaje.substring(0, mensaje.length - 2)
+      swal_vacio(mensaje)
+    } else {
+      ajaxMateria();
+      $('#exampleModal').modal('hide');
+    }
   });
 
   $('#btn_actualizar').click(() => {
-    validar_vacios_actualizar();
+    vacio('#inputCarreraActualizar', 'Carrera')
+    vacio('#inputSemestreActualizar', 'Semestre')
+    vacio('#inputMatriculaActualizar', 'Matricula de la Materia')
+    vacio('#inputMateriaActualizar', 'Nombre de la Materia')
+    vacio('#inputICicloEscolarActualizar', 'Inicio del Ciclo Escolar')
+    vacio('#inpuFCicloEscolarActualizar', 'Fin del Ciclo Escolar')
+    vacio('#inputGrupoActualizar', 'Grupo')
+    vacio('#inputMatriculaProfesorActualizar', 'Matricula Profesor')
+    vacio('#inputNombreProfesorActualizar', 'Nombre Profesor')
+    vacio_radio('lunesActualizar', '#lunesSiActualizar', '#lunesInicioActualizar', 'inicio lunes','#lunesFinActualizar', 'fin lunes')
+    vacio_radio('martesActualizar', '#martesSiActualizar', '#martesInicioActualizar', 'inicio martes','#martesFinActualizar', 'fin martes')
+    vacio_radio('miercolesActualizar', '#miercolesSiActualizar', '#miercolesInicioActualizar', 'inicio miercoles','#miercolesFinActualizar', 'fin miercoles')
+    vacio_radio('juevesActualizar', '#juevesSiActualizar', '#juevesInicioActualizar', 'inicio jueves','#juevesFinActualizar', 'fin jueves')
+    vacio_radio('viernesActualizar', '#viernesSiActualizar', '#viernesInicioActualizar', 'inicio viernes','#viernesFinActualizar', 'fin viernes')
+    if (mensaje_alerta) {
+      mensaje = mensaje.substring(0, mensaje.length - 2)
+      swal_vacio(mensaje)
+    } else {
+      ajaxActualizarMateria();
+      $('#exampleModal').modal('hide');
+    }
   });
 
 });

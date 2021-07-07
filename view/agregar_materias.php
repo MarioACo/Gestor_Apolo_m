@@ -101,7 +101,7 @@
                                         </div>
                                         <div class="form-label-group">
                                             <select class="form-control rounded-pill" id="inputSemestre" name="inputSemestre">
-                                                <option selected value="0">Semestre</option>
+                                                <option selected value="">Semestre</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -115,6 +115,7 @@
                                         </div>
                                         <div class="form-label-group">
                                             <select id="inputMatricula" name="inputMatricula" class="form-control">
+                                                <option value=""></option>
                                             </select>
                                         </div>
                                         <div class="form-label-group">

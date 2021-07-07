@@ -1,60 +1,37 @@
-function validar_vacios(){
-  if($('#inputMateria').val() == "" || /^\s+$/.test($('#inputMateria').val())){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar el nombre de la materia',
-      showConfirmButton: true,
-      toast: true,
-      
-    });
-  return false;
+let mensaje = ""
+let mensaje_alerta = false
 
-  }else if($('#inputUsuario').val() == "" || /^\s+$/.test($('#inputUsuario').val())){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar el nombre del usuario',
-      showConfirmButton: true,
-      toast: true,
-      
-    });
-    return false;
-  }else if($('#inputOcupacion').val() == "" ){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar la ocupacion',
-      showConfirmButton: true,
-      toast: true,
-      
-    });
-    return false;
-  }else if($('#inputIHorario').val() == "" ){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar el horario',
-      showConfirmButton: true,
-      toast: true,
-      
-    });
-    return false;
-  }else if($('#inputFHorario').val() == "" ){
-    Swal.fire({
-      icon: 'error',
-      title: `Oooops`,
-      text: '\n\n Falta ingresar el horario',
-      showConfirmButton: true,
-      toast: true,
-      
-    });
-    return false;  
-  }else{
-    asignar_materias();
-    $('#exampleModal').modal('hide');
-  }
+function vacio(id, nombre) {
+    if ($(id).val() != "") {
+        $(id).addClass('is-valid')
+        $(id).removeClass('is-invalid')
+    } else {
+        $(id).addClass('is-invalid')
+        $(id).removeClass('is-valid')
+        mensaje += `${nombre}, `
+        mensaje_alerta = true
+    }
 }
+
+function swal_vacio(mensaje_vacio) {
+    Swal.fire({
+        icon: 'warning',
+        html: `
+            <p class="fs-2">Te faltan los siguientes campos:</p>
+            <p class="fs-5">${mensaje_vacio}</p>
+        `,
+        showClass: {
+            popup: 'animate__animated animate__fadeInDownBig'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutDownBig'
+        }
+    }).then(() => {
+        mensaje = ""
+        mensaje_alerta = false
+    })
+}
+
 function validar_vacios_actualizar(){
   if($('#inputMateria_actualizar').val() == "" || /^\s+$/.test($('#inputMateria_actualizar').val())){
     Swal.fire({
@@ -153,10 +130,19 @@ function infoAsignar(id_asignar){
     data : "id_asignar=" + id_asignar,
     url : "php/control_infromacion_asignar.php",
     success : (respuesta) => {
-      console.log(respuesta);
       respuesta = JSON.parse(respuesta);
       $('#idAsignado').val(respuesta['id_asg_materia']);
       $('#inputNControlActualizar').val(respuesta['no_control']);
+      $('#inputNombreAlumnoActualizar').val(respuesta['nombre_alumno']);
+      $('#inputCarreraActualizar').val(respuesta['carrera']);
+      $('#inputGrupoActualizar').val(respuesta['grupo']);
+      $('#inputSemestreActualizar').val(respuesta['semestre']);
+      $('#inputMateriaActualizar').val(respuesta['nombre_materia']);
+      $('#inputNProfesorActualizar').val(respuesta['profesor_no']);
+      $('#inputTipoClaseActualizar').val(respuesta['tipo_clase']);
+      let l = respuesta['grupo'];
+      let m = respuesta['nombre_materia'];
+      let n = respuesta['nombre_alumno'];
       $.ajax({
           type: "POST",
           data: "n_control=" + $('#inputNControlActualizar').val(),
@@ -171,33 +157,20 @@ function infoAsignar(id_asignar){
                   success : (r) => {
                     console.log(r);
                     $('#inputGrupoActualizar').html(r);
-                }
-              });
-            }
-        });
-        $('#inputCarreraActualizar').val(respuesta['carrera']);
-        $('#inputGrupoActualizar').val(respuesta['grupo']);
-        $.ajax({
-          type: "POST",
-          data: "grupo=" + $('#inputGrupoActualizar').val(),
-          url: "php/control_informacion_grupo.php",
-          success: (r) => {
-            r = jQuery.parseJSON(r);
-              $('#inputSemestreActualizar').val(r['semestre']);
-              $('#inputNProfesorActualizar').val(r['profesor_no']);
-              $.ajax({
-                type : "POST",
-                data : "grupo=" + $('#inputGrupoActualizar').val(),
-                url : "php/control_grupo_materia.php",
-                success : (r) => {
-                  $('#inputMateriaActualizar').html(r);
+                    $(`#inputGrupoActualizar > option[value='${l}']`).attr("selected", true);
                 }
               });
             }
       });
-      $('#inputSemestreActualizar').val(respuesta['semestre']);
-      $('#inputNProfesorActualizar').val(respuesta['profesor_no']);
-      $('#inputMateriaActualizar').val(respuesta['nombre_materia']);
+      $.ajax({
+        type : "POST",
+        data : "grupo=" + l,
+        url : "php/control_grupo_materia.php",
+        success : (r) => {
+          $('#inputMateriaActualizar').html(r);
+          $(`#inputMateriaActualizar > option[value='${m}']`).attr("selected", true);
+        }
+      });
       $.ajax({
         type: "POST",
         data: "no_control=" + $('#inputNControlActualizar').val(),
@@ -205,10 +178,9 @@ function infoAsignar(id_asignar){
         success: (r) => {
             r = r.trim();
             $('#inputNombreAlumnoActualizar').val(r);
+            $(`#inputNombreAlumnoActualizar > option[value='${n}']`).attr("selected", true);
         }
       });
-      $('#inputNombreAlumnoActualizar').val(respuesta['nombre_alumno']);
-      $('#inputTipoClaseActualizar').val(respuesta['tipo_clase']);
     }
   });  
 }
@@ -483,10 +455,36 @@ $(document).ready(() => {
   });
   
     $('#btn_guardar_materias').click(() => {
-      asignar_materias();
+      vacio('#inputNControl', 'Numero de Control')
+      vacio('#inputNombreAlumno', 'Nombre del Alumno')
+      vacio('#inputCarrera', 'Carrera')
+      vacio('#inputGrupo', 'Grupo')
+      vacio('#inputSemestre', 'Semestre')
+      vacio('#inputMateria', 'Materia')
+      vacio('#inputNProfesor', 'Profesor')
+      vacio('#inputTipoClase', 'Tipo de clase')
+      if (mensaje_alerta) {
+        mensaje = mensaje.substring(0, mensaje.length - 2)
+        swal_vacio(mensaje)
+      } else {
+        asignar_materias();
+      }
     });
 
     $('#btn_actualizar_materias').click(() => {
-      editarAsignado();
+      vacio('#inputNControlActualizar', 'Numero de Control')
+      vacio('#inputNombreAlumnoActualizar', 'Nombre del Alumno')
+      vacio('#inputCarreraActualizar', 'Carrera')
+      vacio('#inputGrupoActualizar', 'Grupo')
+      vacio('#inputSemestreActualizar', 'Semestre')
+      vacio('#inputMateriaActualizar', 'Materia')
+      vacio('#inputNProfesorActualizar', 'Profesor')
+      vacio('#inputTipoClaseActualizar', 'Tipo de clase')
+      if (mensaje_alerta) {
+        mensaje = mensaje.substring(0, mensaje.length - 2)
+        swal_vacio(mensaje)
+      } else {
+        editarAsignado();
+      }
     });
   });

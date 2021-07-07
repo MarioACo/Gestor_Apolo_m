@@ -9,7 +9,7 @@
     $inputCarrera = $_POST['inputCarrera'];
     $inputGrupo = $_POST['inputGrupo'];
     $inputSemestre = $_POST['inputSemestre'];
-    $inputMateria = $_POST['inputMateria'];
+    $inputMateria = trim($_POST['inputMateria']);
     $inputTipoClase = $_POST['inputTipoClase'];
     $inputNProfesor = $_POST['inputNProfesor'];
     

@@ -27,7 +27,7 @@
                 <br>
                 <table class="table table-dark table-hover table-bordered border-white opacidad" id="table_archivos" class="hover" style="width:100%">
                     <thead>
-                        <td>N° Control del Profesor</td>
+                        <td>Numero de Control del Profesor</td>
                         <td>Matricula</td>
                         <td>Archivo</td>
                         <td>Materia</td>
@@ -87,7 +87,7 @@
                 <hr>
                 <h1 class="lead">Descarga total en formato zip</h1>
                 
-                <span class="btn btn-success mt-1 rounded-pill" id="descargarZip" data-bs-toggle="modal" data-bs-target="#dercarga_archivo"> <i class="far fa-file-archive"></i> Descarga</span>
+                <a class="btn btn-success mt-1 rounded-pill" id="descargarZip" href=<?php echo $rutaDescarga = 'php/zip/'. $no_control . ".zip"?> download="<?php echo $no_control . ".zip"?>"> <i class="far fa-file-archive"></i> Descarga</a>
             </div>
         </div>
     </div>
@@ -155,7 +155,7 @@
         </div>
     </div>
 
-    <!-- Modal ver -->
+    <!-- Modal descarga -->
     <div class="modal fade" id="ver_archivo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -163,60 +163,6 @@
                     <div id="archivo_observar"></div>
                     <div class="modal-footer">
                         <span id="btn_cerrar" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</span>
-                        <span id="btn_guardar" type="button" class="btn btn-primary"> <a href="download/" download=""></a>Descargar </span>
-                    </div>
-                </div>    
-            </div>
-        </div>
-    </div>
-    <!-- Modal Descarga -->
-    <div class="modal fade" id="dercarga_archivo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <form id="descarga_profe">
-                        <h3>Formato de desacarga</h3>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="opcionDescarga" id="todo" value="todo" checked>
-                                  <label class="form-check-label" for="todo">Todo</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="opcionDescarga" id="porSemestre" value="semestre">
-                                  <label class="form-check-label" for="porSemestre">Semestre</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="opcionDescarga" id="porUnidad" value="unidad">
-                                  <label class="form-check-label" for="porUnidad">Unidad</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="opcionDescarga" id="porGrupo" value="grupo">
-                                  <label class="form-check-label" for="porGrupo">Grupo</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="opcionDescarga" id="porMateria" value="materia">
-                                  <label class="form-check-label" for="porMateria">Materia</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="mb-3">
-                                    <select disabled class="form-control" id="opcion1" name="opcion1"></select>
-                                </div>
-                                <div class="mb-3">
-                                    <select disabled class="form-control" id="opcion2" name="opcion2"></select>
-                                </div>
-                                <div class="mb-3">
-                                    <select disabled class="form-control" id="opcion3" name="opcion3"></select>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="modal-footer">
-                        <span id="btn_cerrar" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</span>
-                        <span id="btn_guardar" type="button" class="btn btn-primary"> <a href="download/" download=""></a>Descargar </span>
                     </div>
                 </div>    
             </div>

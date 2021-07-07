@@ -9,6 +9,7 @@
   $grupo = $_POST['grupo'];
   $unidad = $_POST['unidad'];
   $semestre = $_POST['semestre'];
+  echo 
   $ruta = "archivos/".$no_control ."/Semestre_".$semestre."/".$materia."/Grupo_" .$grupo."/Unidad_".$unidad."/".$archivo;
   
   $extencion = explode(".", $archivo);

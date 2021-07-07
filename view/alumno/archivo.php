@@ -6,21 +6,16 @@
     
         $conexion = conexion();
         $no_control = $_SESSION['no_control'];
-        $query = "SELECT 
-                asignar_materia.profesor_no as profesor_no,
-                archivos.nombre_archivo as nombre_archivo,
-                asignar_materia.semestre as semestre,
-                asignar_materia.nombre_materia as nombre_materia,
-                archivos.materia as materia,
-                archivos.semestre as semestre,
-                archivos.visible as fecha
-            FROM
-                asignar_materia AS asignar_materia
-            INNER JOIN
-                archivos AS archivos ON asignar_materia.profesor_no = archivos.profesor_no AND asignar_materia.no_control = $no_control AND ";
+        $query = "SELECT nombre_materia,profesor_no FROM asignar_materia WHERE no_control = $no_control";
         $result = mysqli_query($conexion, $query);  
-    
-
+        
+            
+        while($nombre_materia = mysqli_fetch_array($result)){
+            $nombre[] = $nombre_materia['nombre_materia'];
+            $profesor[] = $nombre_materia['profesor_no'];
+        }    
+        
+        
 ?>
 
 
@@ -43,45 +38,61 @@
                 </thead>
                 <tbody>
                 <?php
-                    while($archivo = mysqli_fetch_array($result)){
-                        
-                        echo var_dump($archivo);
-                        
-                
-                        if($visible == 'si'){
-                        
-                        
-
+                    
+                  for($i = 0; $i < count($profesor) ; $i++){
+                    $datos = $nombre[$i];
+                    $qr = "SELECT id_archivo, profesor_no, matricula, nombre_archivo, materia, grupo, unidad, semestre, visible FROM archivos WHERE materia = "."'".$nombre[$i]."'"."AND"."'". $profesor[$i]."'" ."AND visible = 'si'";
+                    $r = mysqli_query($conexion,$qr);
+                    
+                  
+                  
+                  while($archivo = mysqli_fetch_array($r)){
+                    $rutaDescarga = "archivos/". $archivo['profesor_no'] . "/Semestre_" . $archivo['semestre']."/" . $archivo['materia'] . "/Grupo_". $archivo['grupo'] . "/Unidad_" . $archivo['unidad'] . "/" . $archivo['nombre_archivo'];
+                    
                 ?>  
                     <tr class="text-center">
-                        <td><?php echo $horar['nombre_archivo'];?></td>
-                        <td><?php echo $horar['materia'];?></td>
-                        <td><?php echo $horar['semestre'];?></td>
+                        <td><?php echo $archivo['nombre_archivo'];?></td>
+                        <td><?php echo $archivo['materia'];?></td>
+                        <td><?php echo $archivo['semestre'];?></td>
                         <td>
-                            <span class="btn btn-descarga btn-block"><i class="far fa-arrow-alt-circle-down"></i></span>
+                            <a class="btn btn-descarga btn-block" href="<?php echo $rutaDescarga?>" download="<?php echo $archivo['nombre_archivo']?>"><i class="far fa-arrow-alt-circle-down"></i></a>
                         </td>
                         <td>
-                            <span class="btn btn-ver btn-block"><i class="far fa-eye"></i></span>
+                            <span class="btn btn-ver btn-block" type="button"
+                                data-bs-toggle="modal" data-bs-target="#ver_archivo"
+                                onclick="verArchivo(<?php echo $archivo['id_archivo'];?>,`<?php echo $archivo['profesor_no'];?>`,`<?php echo $archivo['nombre_archivo'];?>`,`<?php echo $archivo['semestre'];?>`,`<?php echo $archivo['materia'];?>`,`<?php echo $archivo['grupo']?>`,`<?php echo $archivo['unidad'];?>`)"><i class="far fa-eye"></i></span>
                         </td>
                     </tr>     
                 <?php
-                        }
+                        
+                  }
+                  }
+                
                     
-                    }
                 ?>     
                 </tbody>
             </table>
         </div>
-        <div class="col-md-10 text-right text-end">
-            <p class="text-muted">Descargar total en formato zip</p>
-            <span class="btn btn-success " style="width: 25%;"><i class="far fa-arrow-alt-circle-down"></i> Descargar</span>
-        </div>
+        
     </div>
 </div>
 
+<div class="modal fade" id="ver_archivo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div id="archivo_observar"></div>
+                    <div class="modal-footer">
+                        <span id="btn_cerrar" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</span>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
 <?php
 
     }else{
         header("location:login");
     }
 ?>
+<script src="<?=SERVIDOR?>js/alumno/table_horario.js"></script>

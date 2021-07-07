@@ -114,11 +114,22 @@ function eliminarArchivo(id_archivo,nombre,semestre,materia,grupo,unidad){
     }); 
 }
 
+function eliminarzip(){
+    $.ajax({
+        url: "php/control_eliminar_zip_archivo.php",
+        success: (r) =>{
+            
+        }
+        
+    });
+}
+
 function zip(){
     $.ajax({
         url: "php/control_zip_archivo.php",
         success: (r) =>{
             console.log(r);
+            eliminarzip();
         }
         
     });
@@ -164,7 +175,7 @@ function ajaxSubirArchivos(){
                     position: 'bottom-end',
                     icon: "error",
                     title: "fallo al guardar",
-                    text: "No quiero trabajar 💩 \njajajaja",
+                    text: "LLena todo los campos para continuar",
                     showConfirmButton: false,
                     toast: true,
                     timer: 2000
